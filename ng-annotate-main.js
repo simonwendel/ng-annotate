@@ -429,9 +429,28 @@ function matchResolve(props) {
 };
 
 function renamedString(ctx, originalString) {
+    let rename;
     if (ctx.rename) {
-        return ctx.rename.get(originalString) || originalString;
+        rename = ctx.rename.get(originalString);
     }
+
+    return rename
+        || ctx.preProcessString(originalString)
+        || originalString;
+}
+
+function examineAndRemoveUnderscores(originalString) {
+    const len = originalString.length;
+    if(len < 3) {
+        return originalString;
+    }
+
+    // checks for exactly one leading and exactly one trailing underscore
+    const re = /^_([^_]+.*[^_]+|[^_])_$/;
+    if(re.test(originalString)) {
+        return originalString.substr(1, len - 2);
+    }
+
     return originalString;
 }
 
@@ -1146,6 +1165,10 @@ module.exports = function ngAnnotate(src, options) {
         matchResolve: matchResolve,
         matchProp: matchProp,
         last: last,
+        preProcessString:
+            options.underscores ?
+                examineAndRemoveUnderscores :
+                function() { return null; }
     };
 
     // setup optionals
