@@ -182,6 +182,9 @@ function run(ngAnnotate) {
         }
     }
 
+    console.log("testing removing leading/trailing single underscores from annotations");
+    test(slurp("tests/underscores_annotated.js"), ngAnnotate(slurp("tests/underscores_original.js"), {add: true, underscores: true}).src, "underscore patch");
+
     if (fs.existsSync("tests/angular.js")) {
         console.log("testing performance");
         const ng1 = String(fs.readFileSync("tests/angular.js"));
