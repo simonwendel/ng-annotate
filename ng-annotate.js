@@ -59,6 +59,11 @@ const optimist = require("optimist")
     .options("stats", {
         boolean: true,
         describe: "print statistics on stderr (experimental)",
+    })
+    .options("underscores", {
+        boolean: true,
+        describe: "remove leading+trailing underscores, as runtime injector does",
+        default: false
     });
 
 const argv = optimist.argv;
@@ -132,7 +137,7 @@ function runAnnotate(err, src) {
         config.inFile = filename;
     }
 
-    ["add", "remove", "o", "regexp", "rename", "single_quotes", "plugin", "enable", "stats"].forEach(function(opt) {
+    ["add", "remove", "o", "regexp", "rename", "single_quotes", "plugin", "enable", "stats", "underscores"].forEach(function(opt) {
         if (opt in argv) {
             config[opt] = argv[opt];
         }
