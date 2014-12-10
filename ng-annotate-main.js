@@ -429,14 +429,16 @@ function matchResolve(props) {
 };
 
 function renamedString(ctx, originalString) {
-    let rename;
+    const preprocessed = ctx.preProcessString(originalString)
+        || originalString;
+
+    let renamed;
     if (ctx.rename) {
-        rename = ctx.rename.get(originalString);
+        renamed = ctx.rename.get(preprocessed);
     }
 
-    return rename
-        || ctx.preProcessString(originalString)
-        || originalString;
+    return renamed
+        || preprocessed;
 }
 
 function examineAndRemoveUnderscores(originalString) {
