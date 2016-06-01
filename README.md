@@ -68,10 +68,6 @@ then add `function ngInject(v) { return v }` somewhere in your codebase or proce
 away the `ngInject` function call in your build step.
 
 
-Use the `--underscores` option to remove underscores from any service 
-you reference by the service name surrounded by single underscores.
-
-
 ### Suppressing false positives with ngNoInject
 The `/*@ngInject*/`, `ngInject(..)` and `"ngInject"` siblings have three cousins that
 are used for the opposite purpose, suppressing an annotation that ng-annotate added

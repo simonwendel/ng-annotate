@@ -33,6 +33,8 @@ Use it like this: `--rename oldname1 newname1 oldname2 newname2`
 
 *experimental* Use the `--stats` option to print statistics on stderr.
 
+*experimental* Use the `--underscores` option to remove underscores from any service
+you reference by the service name surrounded by single underscores.
 
 ## Library (API)
 ng-annotate can be used as a library. See [ng-annotate.js](ng-annotate.js) for further info about
